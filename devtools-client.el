@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(add-to-list 'load-path (file-name-directory load-file-name))
+
 (require 'ss-rpc-client)
 (require 'dt-buffer)
 (require 'dt-project)
