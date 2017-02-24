@@ -61,8 +61,12 @@
     (switch-to-buffer log-buffer)))
 
 
+
 (defvar dt:server
-  (ss:start-racket-server "devtools" (format "~/Projects/%s/server.rkt" devtools-dir)))
+  (ss:start-racket-server "devtools"
+                          (expand-file-name "server.rkt"
+                                            (tlc:fragile-dependency-directory tlc:devtools-server-dependency))))
+
 
 (defun dt:call (proc &rest args)
   (apply #'ss:call dt:server proc args))
