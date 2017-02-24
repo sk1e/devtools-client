@@ -7,7 +7,6 @@
 (require 'dt-project)
 (require 'dt-company-word-backend)
 
-;; (require 'dt-git)
 
 
 (defface dt:ebuffer-node-face 
@@ -25,7 +24,6 @@
 
 
 (defvar ss:racket-exec-path
-  ;; "~/local/racket/bin/racket"
   "racket"
   "path to racket executable")
 
@@ -35,12 +33,8 @@
 (setq max-lisp-eval-depth 10000)
 
 (defun ss:start-racket-server (name server-path)
-  ;; server shouldn't produce any output to stdout/err
   (ss:start-server name (format "%s %s" ss:racket-exec-path server-path)))
 
-  ;; (ss:start-server name (format "export PLTSTDERR=\"error none@ss-rpc\"; %s %s 2>ss-rpc-err.txt"
-  ;;       			  ss:racket-exec-path
-  ;;       			  server-path)))
 
 
 (defun kill-nahuy ()
