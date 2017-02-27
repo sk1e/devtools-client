@@ -133,6 +133,33 @@
 				    (&rest args))
   (pt:update-modification-status))
 
+
+
+(defconst pt:buffer (generate-new-buffer "project-tree"))
+
+(with-current-buffer pt:buffer
+  (setq fit-window-to-buffer-horizontally t)
+  (setq right-fringe-width 3)
+  (font-lock-mode 1))
+
+
+(defconst wl:main-layout
+  (wlf:layout 
+   '(| (:right-size 50)
+       source-code
+       project-tree)
+   '((:name source-code)
+     (:name project-tree
+            :buffer pt:buffer))))
+
+(delete-other-windows)
+
+(defun pt:init-main-layout ()
+  (wlf:refresh wl:main-layout))
+
+(defun pt:set-source-code-buffer (buffer)
+  (wlf:set-buffer wl:main-layout 'source-code buffer))
+
 ;; (defadvice compile-goto-error (after pt-hook
 ;; 				     (&rest args))
 ;;   (message ">>>> %s" (buffer-name (current-buffer)))
@@ -152,8 +179,7 @@
 (defun pt:make-buffer (path)
   (let ((buffer (find-file-noselect path t)))
     (with-current-buffer buffer
-      (pt-mode)
-      (layout-mode))
+      (pt-mode))
     buffer)) 
 
 (defun pt:init-file-buffer (path new-name new-mode-line-buffer-identification-parts)
@@ -162,10 +188,6 @@
         		 new-mode-line-buffer-identification-parts))
 
 
-;; (defun pt:init-test-buffer (path)
-;;   (with-current-buffer (find-file-noselect path)
-;;     (pt-mode)
-;;     (layout-mode)))
 
 
 
@@ -173,11 +195,12 @@
 (defun pt:rename-file-buffer (buffer new-name new-mode-line-buffer-identification-parts)
   (with-current-buffer buffer
     (rename-buffer new-name)
-    (setq mode-line-buffer-identification (cl-destructuring-bind ((base-string base-face)
-								  (name-string name-face))
-					      new-mode-line-buffer-identification-parts
-					    (concat (propertize base-string 'font-lock-face base-face)
-						    (propertize name-string 'font-lock-face name-face))))
+    (setq mode-line-buffer-identification
+          (cl-destructuring-bind ((base-string base-face)
+                                  (name-string name-face))
+              new-mode-line-buffer-identification-parts
+            (concat (propertize base-string 'font-lock-face base-face)
+                    (propertize name-string 'font-lock-face name-face))))
     nil))
 
 (defvar pt:exec-proc nil)
@@ -279,19 +302,6 @@
     (with-current-buffer (generate-new-buffer name)
       (compilation-mode)
       (font-lock-mode))))
-
-
-					;(ad-activate #'buffer-modified-p)
-;; (ad-activate #'insert)
-;; (ad-activate #'backward-delete-char-untabify)
-;; ;; (ad-activate #'delete-region)
-;; (ad-activate #'self-insert-command)
-;; (ad-activate #'undo)
-
-;;(add-hook 'after-save-hook #'pt:set-unmodified)
-
-;; (add-hook 'scheme-mode-hook #'pt-mode)
-;; (add-hook 'scheme-mode-hook #'layout-mode)
 
 
 (provide 'dt-project)
