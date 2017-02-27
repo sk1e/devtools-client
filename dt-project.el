@@ -199,8 +199,12 @@
           (cl-destructuring-bind ((base-string base-face)
                                   (name-string name-face))
               new-mode-line-buffer-identification-parts
-            (concat (propertize base-string 'font-lock-face base-face)
-                    (propertize name-string 'font-lock-face name-face))))
+            (let ((normalized-base-string (cond 
+                                           ((> (length base-string) 30)
+                                            (format "%.27s..." base-string))
+                                           (t base-string))))
+              (concat (propertize normalized-base-string 'font-lock-face base-face)
+                      (propertize name-string 'font-lock-face name-face)))))
     nil))
 
 (defvar pt:exec-proc nil)
