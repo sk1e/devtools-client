@@ -63,18 +63,31 @@
   '(( t :inherit dt:ebuffer-node-face :foreground "gray20")) "")
 
 
+(let ((global-ctrl-p-map (make-sparse-keymap)))
+  (define-key global-ctrl-p-map (kbd "p") #'pt:new-project-from-existing-dir!)
+  (define-key global-ctrl-p-map (kbd "i") #'pt:new-project)
+  (define-key global-ctrl-p-map (kbd "l") #'pt:load-project!)
+
+  (define-key (current-global-map) (kbd "C-p") global-ctrl-p-map))
+
 (define-minor-mode pt-mode
   "project tree mode"
   :init-value nil
 					;:lighter " CN"
   :keymap
-  (let ((pt-map (make-sparse-keymap)))
-    ;; ((fn-map (make-sparse-keymap)))
-    ;; (ctrl-f-map (make-sparse-keymap))
-    ;; (define-key ctrl-f-map (kbd "d") #'fn-remove-from-tree)
-    ;; (define-key ctrl-f-map (kbd "M-d") #'fn-remove-file)
-    ;; (define-key fn-map (kbd "C-f") ctrl-f-map)
+  (let ((pt-map (make-sparse-keymap))
+        (ctrl-p-map (make-sparse-keymap)))
 
+    (define-key ctrl-p-map (kbd "n") #'pt:add-file!)
+    (define-key ctrl-p-map (kbd "a") #'pt:add-directory!)
+    (define-key ctrl-p-map (kbd "d") #'pt:delete!)
+    (define-key ctrl-p-map (kbd "u") #'pt:reload-current-project!)
+    
+
+    (define-key pt-map (kbd "C-p") ctrl-p-map)
+
+    (define-key pt-map (kbd "s-;") #'pt:select-prev-intr!)
+    (define-key pt-map (kbd "s-'") #'pt:select-next-intr!)
     (define-key pt-map (kbd "s-[") #'pt:select-prev-leaf!)
     (define-key pt-map (kbd "s-]") #'pt:select-next-leaf!)
     (define-key pt-map (kbd "s-{") #'pt:select-prev-leaf-4!)
