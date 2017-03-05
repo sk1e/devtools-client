@@ -42,9 +42,17 @@
 (defface pt:leaf-face 
   '(( t :inherit dt:ebuffer-node-face :foreground "azure3")) "")
 
-(defface pt:intr-face  
-  '(( t :inherit dt:ebuffer-node-face :foreground "#5B55FE" :weight ultra-bold)) "")
+(defface pt:intr-1-face  
+  '(( t :inherit dt:ebuffer-node-face :foreground "red3" :weight ultra-bold)) "")
 
+(defface pt:intr-2-face  
+  '(( t :inherit dt:ebuffer-node-face :foreground "forest green" :weight ultra-bold)) "")
+
+(defface pt:intr-3-face  
+  '(( t :inherit dt:ebuffer-node-face :foreground "dodger blue" :weight ultra-bold)) "")
+
+(defface pt:intr->3-face  
+  '(( t :inherit dt:ebuffer-node-face :foreground "royal blue" :weight ultra-bold)) "")
 
 
 (defface pt:root-unmerged-face  
@@ -53,6 +61,7 @@
 
 (defface pt:indentation-marker-face
   '(( t :inherit dt:ebuffer-node-face :foreground "gray20")) "")
+
 
 (define-minor-mode pt-mode
   "project tree mode"
@@ -145,7 +154,7 @@
 
 (defconst wl:main-layout
   (wlf:layout 
-   '(| (:right-size 50)
+   '(| (:right-size 40)
        source-code
        project-tree)
    '((:name source-code)
