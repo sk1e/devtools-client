@@ -164,6 +164,16 @@
   (setq right-fringe-width 3)
   (font-lock-mode 1))
 
+(defadvice set-window-buffer (after set-project-tree-window-margin
+				    (window buffer-or-name &optional keep-margins))
+  (when (eq (typecase buffer-or-name
+	     (string (get-buffer buffer))
+	     (buffer buffer-or-name))
+	    pt:buffer)
+    (set-window-margins window 0 4)))
+
+
+(ad-activate #'set-window-buffer)
 
 (defconst wl:main-layout
   (wlf:layout 
