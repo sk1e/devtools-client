@@ -18,6 +18,9 @@
  
  pt:select-next-intr!
  pt:select-prev-intr!
+
+ pt:switch-to-next-section!
+ pt:switch-to-prev-section!
  
  pt:lift-current-node!
  pt:lower-current-node!
@@ -98,6 +101,9 @@
     (define-key pt-map (kbd "s-3") #'pt:switch-by-shortcut-3!)
     (define-key pt-map (kbd "s-4") #'pt:switch-by-shortcut-4!)
 
+    (define-key pt-map (kbd "s-d") #'pt:switch-to-next-section!)
+    (define-key pt-map (kbd "s-a") #'pt:switch-to-prev-section!)
+    
     (define-key pt-map (kbd "M-s-[") #'pt:lift-current-node!)
     (define-key pt-map (kbd "M-s-]") #'pt:lower-current-node!)
     
