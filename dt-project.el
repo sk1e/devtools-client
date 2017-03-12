@@ -93,6 +93,11 @@
     (define-key pt-map (kbd "s-{") #'pt:select-prev-leaf-4!)
     (define-key pt-map (kbd "s-}") #'pt:select-next-leaf-4!)
 
+    (define-key pt-map (kbd "s-1") #'pt:switch-by-shortcut-1!)
+    (define-key pt-map (kbd "s-2") #'pt:switch-by-shortcut-2!)
+    (define-key pt-map (kbd "s-3") #'pt:switch-by-shortcut-3!)
+    (define-key pt-map (kbd "s-4") #'pt:switch-by-shortcut-4!)
+
     (define-key pt-map (kbd "M-s-[") #'pt:lift-current-node!)
     (define-key pt-map (kbd "M-s-]") #'pt:lower-current-node!)
     
@@ -138,6 +143,23 @@
   (let ((default-directory pt:projects-path)
 	(insert-default-directory nil))
     (dt:call! 'pt:load-project! (read-directory-name "project name: "))))
+
+
+(defun pt:switch-by-shortcut-1! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?1))
+
+(defun pt:switch-by-shortcut-2! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?2))
+
+(defun pt:switch-by-shortcut-3! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?3))
+
+(defun pt:switch-by-shortcut-4! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?4))
 
 
 (defvar pt:mod-status-updater (run-at-time nil 0.1 #'pt:update-modification-status))
@@ -308,9 +330,6 @@
 
 (defun pt:interrupt-process ()
   (interrupt-process pt:exec-proc))
-
-;;(kill-process)
-
 
 
 (defun show-test-exec-buffer ()
