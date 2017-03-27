@@ -113,7 +113,6 @@
     (define-key pt-map (kbd "s-|") #'pt:run-test-at-background!)
     (define-key pt-map (kbd "C-\\") #'pt:interrupt-execution!)
     
-    (define-key pt-map (kbd "s-g") #'gt:switch-to-git-tree-buffer!)
     (define-key pt-map (kbd "M-c") #'gt:commit!)
     pt-map)
   (set (make-local-variable 'project-buffer-modified-p) nil))
