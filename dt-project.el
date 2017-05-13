@@ -119,21 +119,21 @@
 
 
 
-
+(directory-file-name "/home/kotik/Projects/hello/")
 
 (defun pt:new-project-from-existing-dir! ()
   (interactive)
   (let ((default-directory pt:projects-path)
 	(insert-default-directory nil))
     (dt:call! 'pt:new-project-from-existing-dir!
-              (directory-file-name (read-directory-name "new project name: ")))))
+              (file-name-nondirectory (directory-file-name (read-directory-name "new project name: "))))))
 
 (defun pt:add-directory! ()
   (interactive)
   (let ((default-directory (dt:call 'pt:entered-directory-path))
 	(insert-default-directory nil))
     (dt:call! 'pt:add-directory!
-              (directory-file-name (read-directory-name "new directory name: ")))))
+              (file-name-nondirectory (directory-file-name (read-directory-name "new directory name: "))))))
 
 (defun pt:add-file! ()
   (interactive)
