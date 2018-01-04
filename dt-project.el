@@ -100,6 +100,17 @@
     (define-key pt-map (kbd "s-2") #'pt:switch-by-shortcut-2!)
     (define-key pt-map (kbd "s-3") #'pt:switch-by-shortcut-3!)
     (define-key pt-map (kbd "s-4") #'pt:switch-by-shortcut-4!)
+    (define-key pt-map (kbd "s-5") #'pt:switch-by-shortcut-5!)
+    (define-key pt-map (kbd "s-6") #'pt:switch-by-shortcut-6!)
+    (define-key pt-map (kbd "s-<f1>") #'pt:switch-by-shortcut-0!)
+    (define-key pt-map (kbd "s-<f2>") #'pt:switch-by-shortcut-9!)
+    (define-key pt-map (kbd "s-<f3>") #'pt:switch-by-shortcut-8!)
+    (define-key pt-map (kbd "s-<f4>") #'pt:switch-by-shortcut-7!)
+
+    (define-key pt-map (kbd "C-&") #'pt:bind-current-node-7!)
+    (define-key pt-map (kbd "C-*") #'pt:bind-current-node-8!)
+    (define-key pt-map (kbd "C-(") #'pt:bind-current-node-9!)
+    (define-key pt-map (kbd "C-)") #'pt:bind-current-node-0!)
 
     (define-key pt-map (kbd "s-d") #'pt:switch-to-next-section!)
     (define-key pt-map (kbd "s-a") #'pt:switch-to-prev-section!)
@@ -165,6 +176,47 @@
 (defun pt:switch-by-shortcut-4! ()
   (interactive)
   (dt:call! 'pt:switch-by-shortcut! ?4))
+
+(defun pt:switch-by-shortcut-5! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?5))
+
+(defun pt:switch-by-shortcut-6! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?6))
+
+(defun pt:switch-by-shortcut-7! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?7))
+
+(defun pt:switch-by-shortcut-8! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?8))
+
+(defun pt:switch-by-shortcut-9! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?9))
+
+(defun pt:switch-by-shortcut-0! ()
+  (interactive)
+  (dt:call! 'pt:switch-by-shortcut! ?0))
+
+
+(defun pt:bind-current-node-7! ()
+  (interactive)
+  (dt:call! 'pt:bind-current-node! ?7))
+
+(defun pt:bind-current-node-8! ()
+  (interactive)
+  (dt:call! 'pt:bind-current-node! ?8))
+
+(defun pt:bind-current-node-9! ()
+  (interactive)
+  (dt:call! 'pt:bind-current-node! ?9))
+
+(defun pt:bind-current-node-0! ()
+  (interactive)
+  (dt:call! 'pt:bind-current-node! ?0))
 
 
 (defvar pt:mod-status-updater (run-at-time nil 0.1 #'pt:update-modification-status))
