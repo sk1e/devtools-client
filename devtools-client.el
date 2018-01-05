@@ -30,8 +30,6 @@
 
 ;; '(add-to-list 'company-backends 'dt:company-word-backend)
 
-(setq max-lisp-eval-depth 10000)
-
 (defun ss:start-racket-server (name server-path)
   (ss:start-server name (format "%s %s" ss:racket-exec-path server-path)))
 

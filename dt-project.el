@@ -154,11 +154,17 @@
               (read-file-name "new file name: "))))
 
 
+(defun pt:load-project-from-string! (name)
+  (setq flycheck-typescript-tslint-executable (format "%s/%s/node_modules/.bin/tslint" pt:projects-path name))
+  (setq flycheck-scss-stylelint-executable (format "%s/%s/node_modules/.bin/stylelint" pt:projects-path name))
+  (dt:call! 'pt:load-project! name))
+
+
 (defun pt:load-project! ()
   (interactive)
   (let ((default-directory pt:projects-path)
 	(insert-default-directory nil))
-    (dt:call! 'pt:load-project! (read-directory-name "project name: "))))
+    (pt:load-project-from-string! (read-directory-name "project name: "))))
 
 
 (defun pt:switch-by-shortcut-1! ()
