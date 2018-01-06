@@ -1,10 +1,10 @@
 (require 'cl-lib)
 (require 'company)
- 
+
 
 (defun dt:company-word-backend (command &optional arg &rest ignored)
   (interactive (list 'interactive))
-  
+
   (cl-case command
     (interactive (company-begin-backend 'dt:company-word-backend))
     (prefix (company-grab-symbol))
@@ -17,7 +17,7 @@
 
 (defun dt:company-word-backend (command &optional arg &rest ignored)
   (interactive (list 'interactive))
-  
+
   (cl-case command
     (interactive (company-begin-backend 'dt:company-word-backend))
     (prefix (company-grab-symbol))

@@ -9,14 +9,14 @@
 
 
 
-(defface dt:ebuffer-node-face 
+(defface dt:ebuffer-node-face
   '((t :family "Liberation Mono")) "")
 
 (defface dt:root-face
   '(( t :inherit dt:header-face :foreground "gray68")) "")
 
 
-(defface dt:header-face 
+(defface dt:header-face
   '((t :inherit dt:ebuffer-node-face
        :height 110
        :weight ultra-bold)) "")
@@ -49,7 +49,7 @@
       (delete-region 1 (point-max))
       (setq buffer-read-only t))
     (call-process "tail" nil log-buffer nil "-n 100"
-		  "/home/kotik/Projects/devtools-stable/ss-rpc.log")
+                  "/home/kotik/Projects/devtools-stable/ss-rpc.log")
     (switch-to-buffer log-buffer)))
 
 
@@ -68,4 +68,3 @@
 
 
 (provide 'devtools-client)
-

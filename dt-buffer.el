@@ -46,5 +46,3 @@
 ;; TOFIX dirty things
 
 (provide 'dt-buffer)
-
-
