@@ -271,8 +271,22 @@
 
 (delete-other-windows)
 
+(add-hook 'window-configuration-change-hook
+          (lambda ()
+            (cond
+             ((and (one-window-p) pt-mode)
+              (pt:init-main-layout))
+             ((and (wlf:wset-live-p wl:main-layout)
+                   (not (local-variable-p 'pt-mode
+                                          (window-buffer (wlf:get-window wl:main-layout 'source-code)))))
+              (delete-window (wlf:get-window wl:main-layout 'project-tree))))))
+
+
 (defun pt:init-main-layout ()
-  (wlf:refresh wl:main-layout))
+  (unless (wlf:wset-live-p wl:main-layout)
+    (wlf:refresh wl:main-layout)))
+
+;; (pt:init-main-layout)
 
 (defun pt:set-source-code-buffer (buffer)
   (wlf:set-buffer wl:main-layout 'source-code buffer))
