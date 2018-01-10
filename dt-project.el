@@ -241,8 +241,9 @@
   (pt:update-modification-status))
 
 
+(defconst pt:buffer-name "project-tree")
 
-(defconst pt:buffer (generate-new-buffer "project-tree"))
+(defconst pt:buffer (generate-new-buffer pt:buffer-name))
 
 (with-current-buffer pt:buffer
   (setq fit-window-to-buffer-horizontally t)
@@ -271,15 +272,19 @@
 
 (delete-other-windows)
 
-(add-hook 'window-configuration-change-hook
-          (lambda ()
-            (cond
-             ((and (one-window-p) pt-mode)
-              (pt:init-main-layout))
-             ((and (wlf:wset-live-p wl:main-layout)
-                   (not (local-variable-p 'pt-mode
-                                          (window-buffer (wlf:get-window wl:main-layout 'source-code)))))
-              (delete-window (wlf:get-window wl:main-layout 'project-tree))))))
+
+(defun wl:update-main-layout ()
+  (cond
+   ((and (one-window-p) pt-mode)
+    (pt:init-main-layout))
+   ((and (wlf:wset-live-p wl:main-layout)
+         (not (local-variable-p 'pt-mode
+                                (window-buffer (wlf:get-window wl:main-layout 'source-code))))
+         (string= (buffer-name (window-buffer (wlf:get-window wl:main-layout 'project-tree)))
+                  pt:buffer-name))
+    (delete-window (wlf:get-window wl:main-layout 'project-tree)))))
+
+(add-hook 'window-configuration-change-hook 'wl:update-main-layout)
 
 
 (defun pt:init-main-layout ()
